@@ -4,9 +4,11 @@ const config = {
     user: 'candxkxa_candybot',
     password: 'b@8L!66T6Kxx',
     database: 'candxkxa_candyBot',
+    connectionLimit: 500,
 };
 
 const pool = mysql.createPool(config);
+
 const connection = () => {
     return new Promise((resolve, reject) => {
         pool.getConnection((err, connection) => {
