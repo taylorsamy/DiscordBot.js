@@ -5,6 +5,7 @@ const path = require('path');
 const { token, prefix } = require('./config.json');
 const utils = require('./utils/utils');
 const msgListener = require('./listeners/messageListener');
+const reactListener = require('./listeners/reactionListener');
 
 const client = new CommandoClient({
     commandPrefix: prefix,
@@ -32,8 +33,11 @@ client.on('guildCreate', (guild) => {
 });
 
 client.on('message', message=> {
-    console.log('event');
     msgListener.messageListener(message);
+});
+
+client.on('messageReactionAdd', (message, user) => {
+    reactListener.reactionListener(message, user);
 });
 
 client.on('error', console.error);

@@ -4,13 +4,14 @@ const config = {
     user: 'candxkxa_candybot',
     password: 'b@8L!66T6Kxx',
     database: 'candxkxa_candyBot',
-    connectionLimit: 500,
+    connectionLimit: 50,
 };
 
 const pool = mysql.createPool(config);
 
 const connection = () => {
     return new Promise((resolve, reject) => {
+        // eslint-disable-next-line no-shadow
         pool.getConnection((err, connection) => {
             if (err) reject(err);
             console.log('MySQL pool connected: threadId ' + connection.threadId);
@@ -35,6 +36,7 @@ const connection = () => {
 };
 const query = (sql, binding) => {
     return new Promise((resolve, reject) => {
+        // eslint-disable-next-line no-unused-vars
         pool.query(sql, binding, (err, result, fields) => {
             if (err) reject(err);
             resolve(result);

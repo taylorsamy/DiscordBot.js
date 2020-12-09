@@ -31,11 +31,16 @@ const giveTreasure = async function(guildID, userID, numTreasure) {
 };
 
 const activeHunts = [];
+const unclaimedTreasure = [];
+
+const emote = '708833760488980540';
 
 
 module.exports = {
     getTreasure: getTreasure,
     giveTreasure: giveTreasure,
     activeHunts: activeHunts,
+    unclaimedTreasure: unclaimedTreasure,
+    emote: emote,
 };
 
