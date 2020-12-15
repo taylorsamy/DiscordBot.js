@@ -5,7 +5,7 @@ const isModerator = async function(member) {
     const connection = await db.connection();
     const config = await connection.query('SELECT * FROM guilds WHERE id = ' + member.guild.id);
     connection.release();
-    return member.roles.cache.has(config[0].moderatorRole);
+    return member.roles.cache.has(config[0].moderatorRole) || isAdministrator(member);
 };
 
 const isAdministrator = async function(member) {

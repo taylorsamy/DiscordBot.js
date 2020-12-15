@@ -1,5 +1,8 @@
 const { Command } = require('discord.js-commando');
 const utils = require('../../utils/utils');
+const treasureUtils = require('../../utils/treasureHunt');
+const lodash = require('lodash');
+
 module.exports = class TestCommand extends Command {
     constructor(client) {
         super(client, {
@@ -13,7 +16,11 @@ module.exports = class TestCommand extends Command {
 
     // noinspection JSCheckFunctionSignatures
     async run(message) {
-        console.log(await utils.isModerator(message.member));
+
+
+        console.log(treasureUtils.unclaimedTreasure);
+        console.log('test');
+        console.log(treasureUtils.unclaimedSpecialTreasure);
 
 
     }

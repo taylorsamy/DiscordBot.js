@@ -5,6 +5,7 @@
     "discord.js": "^12.5.1",
     "discord.js-commando": "github:discordjs/Commando",
     "eslint": "^7.15.0",
+    "lodash": "^4.17.20",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5"
   }
