@@ -25,7 +25,6 @@ module.exports = class TreasureRateCommand extends Command {
     }
 
     async run(message, { trate, srate }) {
-        // TODO not allow duplicate entries
 
         if (utils.isModerator(message.member)) {
             const rate = {
@@ -34,8 +33,14 @@ module.exports = class TreasureRateCommand extends Command {
                 specialRate: srate,
             };
 
+            treasureUtils.treasureRate = treasureUtils.treasureRate.filter(function(value) {
+                return value.guildID !== message.guild.id;
+
+            });
+
             treasureUtils.treasureRate.push(rate);
-            message.say('Treasure rate updated');
+
+            message.say('Treasure Rate Updated');
         }
 
     }
