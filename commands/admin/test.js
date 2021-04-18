@@ -7,7 +7,7 @@ module.exports = class TestCommand extends Command {
     constructor(client) {
         super(client, {
             name: 'test',
-            group: 'admin',
+            group: 'test',
             memberName: 'test',
             description: 'test',
             guildOnly: true,

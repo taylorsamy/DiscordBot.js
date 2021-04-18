@@ -1,13 +1,20 @@
-const db = require('../utils/database');
+const { poolPromise } = require('../utils/database');
 const utils = require('../utils/utils');
 const treasureUtils = require('../utils/treasureHunt');
 const lodash = require('lodash');
 
 const messageListener = async function(message) {
     if (!message.author.bot) {
-        const connection = await db.connection();
-        await connection.query('INSERT INTO `Messages` (GuildID, UserID, MessageID) VALUES (' + message.guild.id + ', ' + message.member.id + ',' + message.id + ');');
-        connection.release();
+        try {
+            const db = await poolPromise;
+            const result = await db.request()
+                .query('INSERT INTO Messages (GuildID, UserID, MessageID) VALUES (' + message.guild.id + ', ' + message.member.id + ',' + message.id + ');');
+            return result;
+        } catch (err) {
+            console.log(err);
+        }
+
+
         if (treasureUtils.activeHunts.includes(message.guild.id)) {
             const rates = lodash.filter(treasureUtils.treasureRate, x => x.guildID === message.guild.id);
 

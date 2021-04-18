@@ -18,6 +18,7 @@ client.registry
     .registerGroups([
         ['admin', 'administrative commands'],
         ['treasure', 'Treasure Hunt Commands'],
+        ['test', 'test commands'],
     ])
     .registerDefaultGroups()
     .registerDefaultCommands()
