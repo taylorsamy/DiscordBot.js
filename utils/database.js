@@ -1,7 +1,7 @@
 const sql = require('mssql');
 const { dbPass } = require('../config.json');
 const config = {
-    server: '127.0.0.1',
+    server: 'DESKTOP-EQ5KKO3',
     user: 'Semikolon',
     password: dbPass,
     database: 'Semikolon',
