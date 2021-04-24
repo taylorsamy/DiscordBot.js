@@ -1,5 +1,4 @@
 const { Command } = require('discord.js-commando');
-const Discord = require('discord.js');
 const utils = require('../../utils/utils');
 module.exports = class AdminRolesCommand extends Command {
     constructor(client) {
@@ -10,7 +9,6 @@ module.exports = class AdminRolesCommand extends Command {
             description: 'Reminds users about something',
             guildOnly: true,
             ownerOnly: true,
-            userPermissions: ['ADMINISTRATOR'],
             args: [
                 {
                     key: 'channel',
@@ -36,12 +34,14 @@ module.exports = class AdminRolesCommand extends Command {
     // noinspection JSCheckFunctionSignatures
     async run(message, { channel, date, remindMessage }) {
 
-        // const datetime = new Date(date);
+        if (!utils.isModerator(message.member)) {
+            return message.say('Sorry ' + message.member.displayName + ' , you need to be a moderator or above to use this command');
+        }
 
         const d = new Date(date)
             .toLocaleString('en-US', { timeZone: 'America/Edmonton' })
             .replace(',', '');
-        utils.query('INSERT INTO Reminders (GuildID, UserID, RemindDate, Message, Channel)' +
+        await utils.query('INSERT INTO Reminders (GuildID, UserID, RemindDate, Message, Channel)' +
             'VALUES (' + message.guild.id + ', ' + message.author.id + ',\'' + d + '\', \'' + remindMessage + '\', \'' + channel + '\')');
 
         await message.say('Reminder scheduled.');
@@ -50,7 +50,6 @@ module.exports = class AdminRolesCommand extends Command {
         setTimeout(() => {
             return channel.send(remindMessage);
         }, new Date(d) - Date.now());
-
 
     }
 };

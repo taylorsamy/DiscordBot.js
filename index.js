@@ -7,6 +7,7 @@ const { token, prefix } = require('./config.json');
 const utils = require('./utils/utils');
 const msgListener = require('./listeners/messageListener');
 const reactListener = require('./listeners/reactionListener');
+const loggingListener = require('./listeners/loggingListener');
 
 const client = new CommandoClient({
     commandPrefix: prefix,
@@ -28,7 +29,7 @@ client.registry
 client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
     client.user.setActivity('hide and seek!');
-
+    // eslint-disable-next-line no-unused-vars
     const job = schedule.scheduleJob({ hour: 17, minute: 0, dayOfWeek: 5 }, function() {
         sendMessage();
     });
@@ -46,6 +47,14 @@ client.on('message', message=> {
 
 client.on('messageReactionAdd', (message, user) => {
     reactListener.reactionListener(message, user);
+});
+
+client.on('guildMemberAdd', (member) => {
+    loggingListener.memberJoin(member);
+});
+
+client.on('guildMemberRemove', (member) => {
+    loggingListener.memberLeave(member);
 });
 
 client.on('error', console.error);

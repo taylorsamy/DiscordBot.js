@@ -9,7 +9,6 @@ module.exports = class AdminRolesCommand extends Command {
             description: 'Directly queries the database',
             guildOnly: true,
             ownerOnly: true,
-            userPermissions: ['ADMINISTRATOR'],
             args: [
                 {
                     key: 'query',
