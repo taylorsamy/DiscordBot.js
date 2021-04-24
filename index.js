@@ -1,5 +1,6 @@
 const { CommandoClient } = require('discord.js-commando');
 const path = require('path');
+const schedule = require('node-schedule');
 
 
 const { token, prefix } = require('./config.json');
@@ -28,13 +29,9 @@ client.once('ready', () => {
     console.log(`Logged in as ${client.user.tag}! (${client.user.id})`);
     client.user.setActivity('hide and seek!');
 
-    setTimeout(function() { // in leftToEight() milliseconds run this:
-        sendMessage(); // send the message once
-        const dayMillseconds = 1000 * 60 * 60 * 24 * 7;
-        setInterval(function() { // repeat this every week
-            sendMessage();
-        }, dayMillseconds);
-    }, leftToFive());
+    const job = schedule.scheduleJob({ hour: 17, minute: 0, dayOfWeek: 5 }, function() {
+        sendMessage();
+    });
 
 });
 
@@ -55,11 +52,6 @@ client.on('error', console.error);
 
 client.login(token);
 
-function leftToFive() {
-    const d = new Date();
-    return (-d + d.setHours(5, 0, 0, 0));
-}
-
 function sendMessage() {
     const mruTuitionAction = client.guilds.cache.find(guild => guild.id === '825823152436543518');
     const date = new Date(Date.now());
@@ -67,6 +59,4 @@ function sendMessage() {
         .send('As of ' +
             date.toLocaleString('en-US', { timeZone: 'America/Edmonton' })
             + ' there are ' + mruTuitionAction.memberCount + ' members in this server');
-
-
 }
