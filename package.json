@@ -1,6 +1,7 @@
 {
-  "name": "CandyBot.js",
-  "version": "1.0.0",
+  "name": "Semikolon.js",
+  "version": "0.1.0",
+  "repository": "https://github.com/taylorsamy/DiscordBot.js/tree/Semikolon",
   "dependencies": {
     "discord.js": "^12.5.1",
     "discord.js-commando": "github:discordjs/Commando",
@@ -8,6 +9,7 @@
     "lodash": "^4.17.20",
     "mssql": "^6.3.1",
     "mysql": "^2.18.1",
-    "mysql2": "^2.2.5"
+    "mysql2": "^2.2.5",
+    "node-schedule": "^2.0.0"
   }
 }
