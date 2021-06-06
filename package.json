@@ -6,10 +6,20 @@
     "discord.js": "^12.5.1",
     "discord.js-commando": "github:discordjs/Commando",
     "eslint": "^7.15.0",
+    "googleapis": "^39.2.0",
     "lodash": "^4.17.20",
     "mssql": "^6.3.1",
     "mysql": "^2.18.1",
     "mysql2": "^2.2.5",
-    "node-schedule": "^2.0.0"
+    "node-html-to-image": "^3.1.0",
+    "node-schedule": "^2.0.0",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "html-to-image": "^1.6.2",
+    "https-proxy-agent": "^5.0.0",
+    "image-clipper": "^0.4.4",
+    "node-canvas": "^2.7.0",
+    "puppeteer": "^10.0.0"
   }
 }

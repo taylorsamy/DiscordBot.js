@@ -21,6 +21,7 @@ client.registry
         ['admin', 'administrative commands'],
         ['treasure', 'Treasure Hunt Commands'],
         ['test', 'test commands'],
+        ['playtesting', 'Commands to facilitate playtesting of games'],
     ])
     .registerDefaultGroups()
     .registerDefaultCommands()
