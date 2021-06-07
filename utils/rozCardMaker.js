@@ -1,8 +1,14 @@
 const nodeHtmlToImage = require('node-html-to-image');
-const path = require('path');
+
+
+const probe = require('probe-image-size');
+
 
 async function generateImage(name, flavour, type, effect, colour, boost, reserve, share, icon, timestamp) {
 
+    const result = await probe(icon);
+
+    const iconTop = (((1500.0 / 2.0) - (result.height / 2.0)) / 2.0);
 
     const cardHTML = `<html class="no-js" lang="">
 <head>
@@ -127,7 +133,7 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
       bottom: 50px;
       left: 50px;
     }
-         .watermark {
+    .watermark {
        transform: rotate(40deg);
        font-family: "Roboto C", sans-serif;
        position: absolute;
@@ -142,18 +148,18 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
      }
      .icon {
        width: 1000px;
-       height: 1000px;
+       height: auto;
        position: relative;
-       top: 150px;
+       top: {{iconTop}}px;
        left: 100px;
      }
      .miniicon {
        width: 175px;
-       height: 175px;
+       height: auto;
 
        position: absolute;
        top: 50px;
-       left: 25px;
+       left: 30px;
      }
 
   </style>
@@ -200,11 +206,23 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
         output: `C:\\Users\\Taylor\\WebstormProjects\\Semikolin.js\\assets\\images\\roz\\${name}${timestamp}.png`,
         html: cardHTML,
         transparent: true,
-        content: { name: name, flavour: flavour, type: type, effect: effect, colour: colour, boost: boost, reserve: reserve, share: share, icon: icon },
+        content: { name: name,
+            flavour: flavour,
+            type: type,
+            effect: effect,
+            colour: colour,
+            boost: boost,
+            reserve: reserve,
+            share: share,
+            icon: icon,
+            iconTop: iconTop,
+        },
     });
     return filepath;
 
 }
+
+
 module.exports = {
     generateImage,
 };

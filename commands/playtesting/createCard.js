@@ -14,7 +14,7 @@ module.exports = class AdminRolesCommand extends Command {
             memberName: 'createcard',
             description: 'create RoZ card',
             guildOnly: true,
-            ownerOnly: true,
+            ownerOnly: false,
             args: [
                 {
                     key: 'details',
