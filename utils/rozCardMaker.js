@@ -159,8 +159,8 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
        height: auto;
 
        position: absolute;
-       top: 40px;
-       left: 30px;
+       top: 32px;
+       left: 32px;
      }
 
   </style>
@@ -218,6 +218,7 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
             icon: icon,
             iconTop: iconTop,
             iconLeft: iconLeft,
+
         },
     });
     return filepath;
