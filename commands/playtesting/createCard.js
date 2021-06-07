@@ -3,6 +3,9 @@ const path = require('path');
 const { MessageAttachment } = require('discord.js');
 const { Command } = require('discord.js-commando');
 const cardMaker = require('../../utils/rozCardMaker');
+
+const allowableGuilds = '517060172628099077';
+
 module.exports = class AdminRolesCommand extends Command {
     constructor(client) {
         super(client, {
@@ -26,6 +29,11 @@ module.exports = class AdminRolesCommand extends Command {
 
     // noinspection JSCheckFunctionSignatures
     async run(message, { details }) {
+
+        if (message.guild.id !== allowableGuilds) {
+            return message.say('This command is not available in this guild.');
+        }
+
         const cardDeets = details.replace(/(\r\n|\n|\r)/gm, '').split(';');
 
         if (cardDeets.length < 8) {
