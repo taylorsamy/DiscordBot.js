@@ -1,7 +1,7 @@
 const nodeHtmlToImage = require('node-html-to-image');
 const path = require('path');
 
-async function generateImage(name, flavour, type, effect, colour, boost, reserve, share, timestamp) {
+async function generateImage(name, flavour, type, effect, colour, boost, reserve, share, icon, timestamp) {
 
 
     const cardHTML = `<html class="no-js" lang="">
@@ -58,12 +58,15 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
     }
     .name {
       position: absolute;
+      height: auto;
       top: 75px;
       right: 75px;
       font-family: "Roboto C", sans-serif;
-      font-size: 90px;
+      font-size: 100px;
       color: white;
       z-index: 9;
+      transform: scale(1, 1.25);
+      -webkit-transform: scale(1, 1.25); /* Safari and Chrome */
     }
     .flavour {
       position: absolute;
@@ -71,25 +74,31 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
       bottom: 75px;
       text-align: center;
       font-family: 'Literata', serif;
-      font-size: 55px;
-      color: white;
+      font-size: 60px;
+      color: black;
       z-index: 9;
       margin-left: auto;
       margin-right: auto;
       left: 0;
       right: 0;
+      transform: scale(1, 1.25);
+      -webkit-transform: scale(1, 1.25); /* Safari and Chrome */
+      line-height: 65px;
     }
     .effect {
       width: 80%;
       position: absolute;
       text-align: center;
       font-family: "Roboto C", sans-serif;
-      font-size: 50px;
+      font-size: 60px;
       color: white;
       margin-left: auto;
       margin-right: auto;
       left: 0;
       right: 0;
+            transform: scale(1, 1.25);
+      -webkit-transform: scale(1, 1.25); /* Safari and Chrome */
+       line-height: 65px;
     }
     .boost {
       width: 175px;
@@ -131,7 +140,21 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
      .copyright {
        font-size: 50px;
      }
+     .icon {
+       width: 1000px;
+       height: 1000px;
+       position: relative;
+       top: 150px;
+       left: 100px;
+     }
+     .miniicon {
+       width: 175px;
+       height: 175px;
 
+       position: absolute;
+       top: 50px;
+       left: 25px;
+     }
 
   </style>
 </head>
@@ -139,13 +162,19 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
 <div class="container">
   <div class="main"></div>
   <div class="colour">
+      <div class="icon">
+      <img src='{{icon}}' class="icon">
+    </div>
+    <div class="miniicon">
+      <img src='{{icon}}' class="miniicon">
+    </div>
       <div class="watermark">
           Playtest Card
           Unofficial
          <div class="copyright">Card Design © Gobico Games</div>
       </div>
     <div class="name">
-      <b>{{name}}</b>
+      <b><b>{{name}}</b></b>
     </div>
     <div class="flavour">
       <em>{{flavour}}</em>
@@ -166,12 +195,12 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
 </html>
   `;
 
-    const filepath = `C:\\Users\\Taylor\\WebstormProjects\\Semikolin.js\\assets\\images\\roz\\${name}:${timestamp}.png`;
+    const filepath = `C:\\Users\\Taylor\\WebstormProjects\\Semikolin.js\\assets\\images\\roz\\${name}${timestamp}.png`;
     await nodeHtmlToImage({
-        output: `C:\\Users\\Taylor\\WebstormProjects\\Semikolin.js\\assets\\images\\roz\\${name}:${timestamp}.png`,
+        output: `C:\\Users\\Taylor\\WebstormProjects\\Semikolin.js\\assets\\images\\roz\\${name}${timestamp}.png`,
         html: cardHTML,
         transparent: true,
-        content: { name: name, flavour: flavour, type: type, effect: effect, colour: colour, boost: boost, reserve: reserve, share: share },
+        content: { name: name, flavour: flavour, type: type, effect: effect, colour: colour, boost: boost, reserve: reserve, share: share, icon: icon },
     });
     return filepath;
 
