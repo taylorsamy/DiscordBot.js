@@ -9,6 +9,7 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
     const result = await probe(icon);
 
     const iconTop = (((1500.0 / 2.0) - (result.height / 2.0)) / 2.0);
+    const iconLeft = (((1350.0 / 2.0) - (1000 / 2.0)) / 2.0); // 87.5
 
     const cardHTML = `<html class="no-js" lang="">
 <head>
@@ -102,9 +103,9 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
       margin-right: auto;
       left: 0;
       right: 0;
-            transform: scale(1, 1.25);
+      transform: scale(1, 1.25);
       -webkit-transform: scale(1, 1.25); /* Safari and Chrome */
-       line-height: 65px;
+      line-height: 65px;
     }
     .boost {
       width: 175px;
@@ -151,14 +152,14 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
        height: auto;
        position: relative;
        top: {{iconTop}}px;
-       left: 100px;
+       left: {{iconLeft}}px;
      }
      .miniicon {
        width: 175px;
        height: auto;
 
        position: absolute;
-       top: 50px;
+       top: 40px;
        left: 30px;
      }
 
@@ -216,6 +217,7 @@ async function generateImage(name, flavour, type, effect, colour, boost, reserve
             share: share,
             icon: icon,
             iconTop: iconTop,
+            iconLeft: iconLeft,
         },
     });
     return filepath;
